@@ -1,0 +1,234 @@
+<!--
+
+Realizado por: Joel Alejandro Rodriguez Vega.
+Blog: http://blog.janosconsult.com/
+-->
+
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>PickTable List</title>
+ 
+  <script src="jquery-1.10.2.min.js"></script>
+<style>
+   table#origen tr:hover{
+    cursor: pointer;
+    background: #ddd;
+   }
+
+   table#destino tr:hover{
+    cursor: pointer;
+    background: #ddd;
+   }
+
+  .row_selected{
+    background: #666;
+    color:#fff;
+
+  }
+  
+</style>
+  <script>
+  $(function() {
+       
+       
+        $("#addRight").attr("disabled","disabled");
+        $("#addLeft").attr("disabled","disabled");
+        $("#addRightAll").attr("disabled","disabled");
+        $("#addLeftAll").attr("disabled","disabled");
+
+        $("#origen  tbody" ).on( "click","tr", function() {
+        	 $("#addRight").removeAttr("disabled");
+        	 $("#addRightAll").removeAttr("disabled");
+             $("#addLeft").attr("disabled","disabled");
+             $("#addLeftAll").attr("disabled","disabled");
+
+  			 $("#origen tr").removeClass("row_selected");
+             $(this).addClass("row_selected");
+        });
+
+        $("#destino  tbody" ).on( "click","tr", function() {
+             $("#addLeft").removeAttr("disabled");
+        	 $("#addLeftAll").removeAttr("disabled");
+             $("#addRight").attr("disabled","disabled");
+             $("#addRightAll").attr("disabled","disabled");
+
+  			 $("#destino tr").removeClass("row_selected");
+             $(this).addClass("row_selected");
+        });
+		
+		$("#addRight").click(function(){
+			   
+			   var p0= 0;
+	       	   var p1= 0;
+	       	   var p2= 0;
+	       	   var p3= 0;
+		       $('table#origen tr').each(function(row){ 
+		           if(row > 0){
+	                   if($(this).hasClass("row_selected")){
+						   p0 = $(this).find("td").eq(0).text();
+						   p1 = $(this).find("td").eq(1).text();
+						   p2 = $(this).find("td").eq(2).text();
+						   p3 = $(this).find("td").eq(3).text();
+						   $(this).remove();
+				       }
+		           }
+				  
+			   });
+		       $('#destino tr:last').after('<tr><td>' + p0 + '</td>'+
+			                                             '<td>' + p1 +'</td>'+
+														 '<td>' + p2 +'</td>'+
+														 '<td>' + p3 +'</td>'+
+														 '</tr>');
+
+		       $("#addRight").attr("disabled","disabled");
+               $("#addRightAll").attr("disabled","disabled");
+		});
+
+		$("#addLeft").click(function(){
+				var p0= 0;
+		       	var p1= 0;
+		       	var p2= 0;
+		       	var p3= 0;
+		       $('table#destino tr').each(function(row){ 
+			           if(row > 0){
+						   if($(this).hasClass("row_selected")){
+							   p0 = $(this).find("td").eq(0).text();
+							   p1 = $(this).find("td").eq(1).text();
+							   p2 = $(this).find("td").eq(2).text();
+							   p3 = $(this).find("td").eq(3).text();
+							   $(this).remove();
+					       }
+				       }
+			   });
+		       $('#origen tr:last').after('<tr><td>' + p0 + '</td>'+
+			                                             '<td>' + p1 +'</td>'+
+														 '<td>' + p2 +'</td>'+
+														 '<td>' + p3 +'</td>'+
+														 '</tr>');
+		       $("#addLeft").attr("disabled","disabled");
+               $("#addLeftAll").attr("disabled","disabled");
+		});
+
+		$("#addLeftAll").click(function(){
+				var p0= 0;
+		       	var p1= 0;
+		       	var p2= 0;
+		       	var p3= 0;
+		       $('table#destino tr').each(function(row){ 
+		               
+				       if(row > 0){
+				       	   p0 = $(this).find("td").eq(0).text();
+						   p1 = $(this).find("td").eq(1).text();
+						   p2 = $(this).find("td").eq(2).text();
+						   p3 = $(this).find("td").eq(3).text();
+						   $('#origen tr:last').after('<tr><td>' + p0 + '</td>'+
+				                                             '<td>' + p1 +'</td>'+
+															 '<td>' + p2 +'</td>'+
+															 '<td>' + p3 +'</td>'+
+															 '</tr>');
+						   $(this).remove();
+				       }   
+					 
+			   });
+
+			   $("#addLeft").attr("disabled","disabled");
+               $("#addLeftAll").attr("disabled","disabled");		       
+		});
+
+		$("#addRightAll").click(function(){
+			   var p0= 0;
+		       var p1= 0;
+		       var p2= 0;
+		       var p3= 0;
+
+		       $('table#origen tr').each(function(row){ 
+		               
+				       if(row > 0){
+				       	   p0 = $(this).find("td").eq(0).text();
+						   p1 = $(this).find("td").eq(1).text();
+						   p2 = $(this).find("td").eq(2).text();
+						   p3 = $(this).find("td").eq(3).text();
+						   $('#destino tr:last').after('<tr><td>' + p0 + '</td>'+
+				                                             '<td>' + p1 +'</td>'+
+															 '<td>' + p2 +'</td>'+
+															 '<td>' + p3 +'</td>'+
+															 '</tr>');
+						   $(this).remove();
+				       }   
+					 
+			   });
+
+			   $("#addRight").attr("disabled","disabled");
+               $("#addRightAll").attr("disabled","disabled");		       
+		});
+  });
+  
+  function getRow(table){
+         
+  }
+  </script>
+</head>
+<body>
+        
+		 <table>
+		    <tr>
+			   <td>
+			         <label>Origen</label>
+                     <table style="border:1px solid #444" id="origen">
+					    <tr>
+						   <th>NroItem</th>
+						   <th>Id</th>
+						   <th>Nombre</th>
+						   <th>Cantidad(Unid.)</th>
+						</tr>
+						<tbody>
+						<tr>
+						   <td>1</td>
+						   <td>001</td>
+						   <td>Producto1</td>
+						    <td>2</td>
+						</tr>
+						<tr>
+						   <td>2</td>
+						   <td>002</td>
+						   <td>Producto2</td>
+						    <td>4</td>
+						</tr>
+						<tr>
+						   <td>3</td>
+						   <td>003</td>
+						   <td>Producto3</td>
+						    <td>6</td>
+						</tr>
+						</tbody>
+					 </table>			  
+			   </td>
+			   <td>
+					 <input type="button" id ="addRight"/ value="toRight"><br/>
+					 <input type="button" id="addRightAll" value="toRightAll"/><br/>
+					 <input type="button" id ="addLeft" value="toLeft"/><br/>
+					 <input type="button" id="addLeftAll" value="toLeftAll"/><br/>
+     		   </td>
+			   <td>
+			         <label>Destino</label>
+                     <table style="border:1px solid #444"  id="destino">
+					    <tr>
+						   <th>NroItem</th>
+						   <th>Id</th>
+						   <th>Nombre</th>
+						   <th>Cantidad(Unid.)</th>
+						</tr>
+						<tbody>
+						
+						</tbody>
+					 </table>			
+			   </td>
+			</tr> 
+		 </table>
+		 
+		
+ </body>
+ 
+ </html>
+
